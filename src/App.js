@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import SideNav from "./features/sidenav";
+import Content from "./features/content";
 
 function App() {
   const [activeNavItem, setActiveNavItem] = useState("Dashboard");
@@ -10,7 +11,9 @@ function App() {
       <div className="bg-indigo-800 h-screen">
         <SideNav updateActiveNavItem={updateActiveNavItem}></SideNav>
       </div>
-      <div className="col-span-5 h-screen"></div>
+      <div className="col-span-5 h-screen">
+        <Content activeNavItem={activeNavItem}></Content>
+      </div>
     </div>
   );
 }
