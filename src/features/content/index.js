@@ -1,15 +1,12 @@
 import React from "react";
+import Dashboard from "./dashboard";
+import Calendar from "./calendar";
 
 const Content = ({ activeNavItem }) => {
-  console.log(activeNavItem);
   return (
-    <div className="grid-cols-1 text-center">
-      {activeNavItem === "Dashboard" && (
-        <div className="bg-red-900">Dashboard</div>
-      )}
-      {activeNavItem === "Calendar" && (
-        <div className="bg-blue-900">Calendar</div>
-      )}
+    <div className="grid-cols-1">
+      {activeNavItem === "Dashboard" && <Dashboard />}
+      {activeNavItem === "Calendar" && <Calendar />}
       {activeNavItem === "Workstations" && (
         <div className="bg-green-900">Workstations</div>
       )}
