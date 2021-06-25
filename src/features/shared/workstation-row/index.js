@@ -20,9 +20,9 @@ const WorkstationRow = ({ props }) => {
   console.log(data);
 
   return (
-    <div className="grid-cols-6 flex justify-between">
-      {data.map((datum) => (
-        <Workstation props={{ ...datum }} />
+    <div className="grid-cols-6 flex justify-evenly w-full">
+      {data.map((datum, i) => (
+        <Workstation key={i} props={{ ...datum }} />
       ))}
     </div>
   );

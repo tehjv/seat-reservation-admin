@@ -10,6 +10,12 @@ module.exports = {
 
       "3/4": "75%",
     },
+    flexGrow: {
+      "0": 0,
+      DEFAULT: 0,
+      "1": 1,
+      "2": 2
+    },
   },
   variants: {
     extend: {},
