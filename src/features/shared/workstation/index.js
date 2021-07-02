@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Workstation = ({ props }) => {
   const logos = [
@@ -19,7 +20,10 @@ const Workstation = ({ props }) => {
     <>
       {!props.isFiller ? (
         <div
-          className={"flex relative border-2 h-16 w-24 cursor-pointer " + colors[props.status]}
+          className={
+            "flex relative border-2 h-16 w-24 cursor-pointer " +
+            colors[props.status]
+          }
         >
           <input className="absolute top-1 right-1" type="checkbox"></input>
           <img
@@ -33,6 +37,12 @@ const Workstation = ({ props }) => {
       )}
     </>
   );
+};
+
+Workstation.propTypes = {
+  isFiller: PropTypes.bool,
+  status: PropTypes.number,
+  type: PropTypes.number,
 };
 
 export default Workstation;

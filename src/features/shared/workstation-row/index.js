@@ -1,5 +1,6 @@
 import React from "react";
 import Workstation from "../workstation";
+import PropTypes from "prop-types";
 
 const WorkstationRow = ({ props }) => {
   let data;
@@ -17,8 +18,6 @@ const WorkstationRow = ({ props }) => {
     data = props.workstations;
   }
 
-  console.log(data);
-
   return (
     <div className="grid-cols-6 flex justify-evenly w-full">
       {data.map((datum, i) => (
@@ -26,6 +25,10 @@ const WorkstationRow = ({ props }) => {
       ))}
     </div>
   );
+};
+
+WorkstationRow.propTypes = {
+  workstations: PropTypes.array,
 };
 
 export default WorkstationRow;

@@ -110,50 +110,31 @@ const withStatusRowData = [
 ];
 
 const withStatusRowData2 = [
-    {
-      type: WorkstationType.WINDOWS,
-      status: WorkstationStatus.NOTALLOWED,
-    },
-    {
-      type: WorkstationType.APPLE,
-      status: WorkstationStatus.RESERVED,
-    },
-    {
-      type: WorkstationType.NEWDOCK,
-      status: WorkstationStatus.NOTALLOWED,
-    },
-    {
-      type: WorkstationType.OLDDOCK,
-      status: WorkstationStatus.AVAILABLE,
-    },
-    {
-      type: WorkstationType.APPLE,
-      status: WorkstationStatus.NOTALLOWED,
-    },
-    {
-      type: WorkstationType.WINDOWS,
-      status: WorkstationStatus.RESERVED,
-    },
-  ];
-
-export const noStatusSectordata = {
-  sectorLabel: "Sector 1",
-  sectorBays: [
-    { bayLabel: "Bay 1", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
-    { bayLabel: "Bay 2", bayRows: [noStatusRowData, noStatusRowData] },
-  ],
-};
-
-export const withStatusSectordata = {
-  sectorLabel: "Sector 1",
-  sectorBays: [
-    {
-      bayLabel: "Bay 1",
-      bayRows: [withStatusRowAllTypesData, withStatusRowData],
-    },
-    { bayLabel: "Bay 2", bayRows: [withStatusRowData, withStatusRowData2] },
-  ],
-};
+  {
+    type: WorkstationType.WINDOWS,
+    status: WorkstationStatus.NOTALLOWED,
+  },
+  {
+    type: WorkstationType.APPLE,
+    status: WorkstationStatus.RESERVED,
+  },
+  {
+    type: WorkstationType.NEWDOCK,
+    status: WorkstationStatus.NOTALLOWED,
+  },
+  {
+    type: WorkstationType.OLDDOCK,
+    status: WorkstationStatus.AVAILABLE,
+  },
+  {
+    type: WorkstationType.APPLE,
+    status: WorkstationStatus.NOTALLOWED,
+  },
+  {
+    type: WorkstationType.WINDOWS,
+    status: WorkstationStatus.RESERVED,
+  },
+];
 
 export const rowData = [
   {
@@ -181,3 +162,22 @@ export const rowData = [
     status: WorkstationStatus.NOTALLOWED,
   },
 ];
+
+export const noStatusSectordata = {
+  sectorLabel: "Sector 1",
+  sectorBays: [
+    { bayLabel: "Bay 1", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
+    { bayLabel: "Bay 2", bayRows: [noStatusRowData, noStatusRowData] },
+  ],
+};
+
+export const withStatusSectordata = {
+  sectorLabel: "Sector 1",
+  sectorBays: [
+    {
+      bayLabel: "Bay 1",
+      bayRows: [withStatusRowAllTypesData, withStatusRowData],
+    },
+    { bayLabel: "Bay 2", bayRows: [withStatusRowData, withStatusRowData2] },
+  ],
+};

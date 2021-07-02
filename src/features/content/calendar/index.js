@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import WorkstationStatus from "../../../constants/WorkstationStatus";
 import "react-datepicker/dist/react-datepicker.css";
 import Sector from "../../shared/sector";
 import { noStatusSectordata, withStatusSectordata } from "./test-data";
 
 const Calendar = ({ data }) => {
-  console.log(WorkstationStatus);
-  let floorPlanData = withStatusSectordata;
   const [startDate, setStartDate] = useState(null);
+  const [floorPlan, setFloorPlan] = useState(noStatusSectordata);
   const floors = ["Floor 15", "Floor 16"];
   const statusLegends = [
     {
@@ -28,7 +26,7 @@ const Calendar = ({ data }) => {
   return (
     <div id="calendar" className="p-8 h-full flex flex-col">
       <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto">
-        <Sector props={{ ...floorPlanData }} />
+        <Sector props={{ ...floorPlan }} />
       </div>
       <div id="calendarLegendDetails" className="flex">
         {statusLegends.map((legend, i) => (
@@ -57,7 +55,9 @@ const Calendar = ({ data }) => {
             onChange={(date) => {
               setStartDate(date);
               console.log("changing floor plan");
-              floorPlanData = withStatusSectordata;
+              console.log("new", withStatusSectordata);
+              // floorPlanData = withStatusSectordata;
+              setFloorPlan(withStatusSectordata);
             }}
           />
         </div>
