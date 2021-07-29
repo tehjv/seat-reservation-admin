@@ -82,57 +82,174 @@ const noStatusRowData = [
   },
 ];
 
-const withStatusRowData = [
+const withStatusRowData1 = [
   {
     type: WorkstationType.WINDOWS,
     status: WorkstationStatus.AVAILABLE,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
   },
   {
     type: WorkstationType.APPLE,
     status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "2"
   },
   {
     type: WorkstationType.NEWDOCK,
     status: WorkstationStatus.AVAILABLE,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "3"
   },
   {
     type: WorkstationType.OLDDOCK,
     status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "4"
   },
   {
     type: WorkstationType.APPLE,
     status: WorkstationStatus.RESERVED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "John",
+    seatId: "5"
   },
   {
     type: WorkstationType.WINDOWS,
     status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "6"
   },
 ];
 
 const withStatusRowData2 = [
   {
     type: WorkstationType.WINDOWS,
+    status: WorkstationStatus.AVAILABLE,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
+  },
+  {
+    type: WorkstationType.APPLE,
     status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
+  },
+  {
+    type: WorkstationType.NEWDOCK,
+    status: WorkstationStatus.AVAILABLE,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
+  },
+  {
+    type: WorkstationType.OLDDOCK,
+    status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
   },
   {
     type: WorkstationType.APPLE,
     status: WorkstationStatus.RESERVED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "John",
+    seatId: "1"
+  },
+  {
+    type: WorkstationType.WINDOWS,
+    status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
+  },
+];
+
+const withStatusRowData3 = [
+  {
+    type: WorkstationType.WINDOWS,
+    status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
+  },
+  {
+    type: WorkstationType.APPLE,
+    status: WorkstationStatus.RESERVED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "Jan",
+    seatId: "1"
   },
   {
     type: WorkstationType.NEWDOCK,
     status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
   },
   {
     type: WorkstationType.OLDDOCK,
     status: WorkstationStatus.AVAILABLE,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
   },
   {
     type: WorkstationType.APPLE,
     status: WorkstationStatus.NOTALLOWED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "",
+    seatId: "1"
   },
   {
     type: WorkstationType.WINDOWS,
     status: WorkstationStatus.RESERVED,
+    monitors: 1,
+    docking: "none",
+    ports: "4521",
+    reservedBy: "Ann",
+    seatId: "1"
   },
 ];
 
@@ -176,8 +293,8 @@ export const withStatusSectordata = {
   sectorBays: [
     {
       bayLabel: "Bay 1",
-      bayRows: [withStatusRowAllTypesData, withStatusRowData],
+      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
     },
-    { bayLabel: "Bay 2", bayRows: [withStatusRowData, withStatusRowData2] },
+    { bayLabel: "Bay 2", bayRows: [withStatusRowData2, withStatusRowData3] },
   ],
 };

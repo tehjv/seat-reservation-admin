@@ -1,5 +1,6 @@
 import React from "react";
 import WorkstationRow from "../workstation-row";
+import PropTypes from "prop-types";
 
 const Bay = ({ props }) => {
   return (
@@ -9,11 +10,18 @@ const Bay = ({ props }) => {
       </div>
       <div className="flex flex-col w-full justify-center px-4 items-center bg-gray-300">
         {props.bayRows.map((row, i) => (
-          <WorkstationRow key={i} props={{ workstations: row }} />
+          <WorkstationRow key={i} props={{ workstations: row, selectionUpdater: props.selectionUpdater, currentSelection: props.currentSelection }} />
         ))}
       </div>
     </div>
   );
 };
+
+Bay.propTypes = {
+  bayLabel: PropTypes.string,
+  bayRows: PropTypes.array,
+  selectionUpdater: PropTypes.func,
+  currentSelection: PropTypes.array
+}
 
 export default Bay;

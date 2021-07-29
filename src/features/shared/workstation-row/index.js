@@ -21,7 +21,7 @@ const WorkstationRow = ({ props }) => {
   return (
     <div className="grid-cols-6 flex justify-evenly w-full">
       {data.map((datum, i) => (
-        <Workstation key={i} props={{ ...datum }} />
+        <Workstation key={i} props={{ ...datum, selectionUpdater: props.selectionUpdater, currentSelection: props.currentSelection }} />
       ))}
     </div>
   );
@@ -29,6 +29,8 @@ const WorkstationRow = ({ props }) => {
 
 WorkstationRow.propTypes = {
   workstations: PropTypes.array,
+  selectionUpdater: PropTypes.func,
+  currentSelection: PropTypes.array
 };
 
 export default WorkstationRow;
