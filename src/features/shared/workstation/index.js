@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Modal from 'react-modal';
 import WorkstationStatus from '../../../constants/WorkstationStatus';
+import EmployeeSelector from "../employee-selector";
 
 const Workstation = ({ props }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ const Workstation = ({ props }) => {
       display: 'flex',
       'flexDirection': 'column',
       'alignItems': 'baseline',
+      height: '500px'
     },
   };
 
@@ -94,9 +96,10 @@ const Workstation = ({ props }) => {
             <label>{"Docking Station: " + props.docking}</label>
             <label>{"Network Ports: " + props.ports}</label>
             <label>{"Reserved by: " + (props.reservedBy ? props.reservedBy : "N/A")}</label>
-            <div className="flex w-full mt-8 justify-between">
-              <button className="self-center py-1 px-2 text-white bg-red-700 rounded" onClick={closeModal}>Cancel</button>
-              {!props.reservedBy && <button className="self-center py-1 px-2 text-white bg-indigo-700 rounded" onClick={reserve}>Reserve</button>}
+            <div className="flex w-full mt-8 justify-between flex-grow-2 items-end">
+              <button className="py-1 px-2 text-white bg-red-700 rounded" onClick={closeModal}>Cancel</button>
+              <EmployeeSelector></EmployeeSelector>
+              {!props.reservedBy && <button className="py-1 px-2 text-white bg-indigo-700 rounded" onClick={reserve}>Reserve</button>}
             </div>
           </Modal>
         </div>
