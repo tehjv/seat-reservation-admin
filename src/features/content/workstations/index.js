@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import { workStationsSectorData } from "./test-data";
 
 const Workstations = ({ data }) => {
-    const [floorPlan, setFloorPlan] = useState(workStationsSectorData);
+    const [floorPlan] = useState(workStationsSectorData);
     const [startDate, setStartDate] = useState(new Date());
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState('');

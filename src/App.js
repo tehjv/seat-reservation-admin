@@ -4,9 +4,16 @@ import React, { useState } from "react";
 import SideNav from "./features/sidenav";
 import Content from "./features/content";
 import Login from "./features/login";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  sidebar: {
+    background: `${theme.palette.primary.light}`,
+  }
+}));
 
 function App() {
+  const themeClasses = useStyles();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeNavItem, setActiveNavItem] = useState("Dashboard");
   const updateActiveNavItem = (item) => setActiveNavItem(item);
@@ -16,11 +23,11 @@ function App() {
       <div className={"h-screen w-screen " + (isLoggedIn ? "hidden" : "")}>
         <Login props={{ setIsLoggedIn }}></Login>
       </div>
-      <div className={"font-mono grid-cols-6 " + (isLoggedIn ? "grid" : "hidden")}>
-        <div className="bg-indigo-800 h-screen shadow-md">
+      <div className={"grid-cols-6 " + (isLoggedIn ? "grid" : "hidden")}>
+        <div className={"h-screen shadow-md " + themeClasses.sidebar}>
           <SideNav navState={{ updateActiveNavItem, activeNavItem }} />
         </div>
-        <div className=" col-span-5 h-screen overflow-auto">
+        <div className="col-span-5 h-screen overflow-auto">
           <Content activeNavItem={activeNavItem}></Content>
         </div>
       </div>

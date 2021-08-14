@@ -1,6 +1,31 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  heading: {
+    background: `${theme.palette.primary.dark}`,
+    color: `${theme.palette.primary.contrastText}`
+  },
+  button: {
+    background: `${theme.palette.primary.light}`,
+    color: `${theme.palette.primary.contrastText}`,
+    "font-weight": 300,
+    padding: "1rem 1.5rem",
+    "&:hover": {
+      background: `${theme.palette.secondary.main}`,
+      color: `${theme.palette.secondary.contrastText}`
+    }
+  },
+  active: {
+    background: `${theme.palette.primary.main}`,
+    color: `${theme.palette.primary.contrastText}`,
+    "font-weight": 600,
+    padding: "1rem 1.5rem",
+  }
+}));
 
 const SideNav = ({ navState }) => {
+  const themeClasses = useStyles();
   const navItems = [
     {
       link: "Dashboard",
@@ -29,9 +54,9 @@ const SideNav = ({ navState }) => {
   ];
 
   return (
-    <div className="grid-cols-1 text-white">
-      <div className="bg-indigo-900 py-8">
-        <div className="text-3xl font-bold px-2">Admin Webapp</div>
+    <div className="grid-cols-1">
+      <div className={"py-8 " + themeClasses.heading}>
+        <h1 className="text-3xl font-bold px-2">Admin Webapp</h1>
       </div>
       <hr></hr>
       <div className="nav-group cursor-pointer">
@@ -50,11 +75,13 @@ const SideNav = ({ navState }) => {
 };
 
 const SideNavItem = ({ activeNavItem, updateActiveNavItem, link, label }) => {
+  const themeClasses = useStyles();
+
   return (
     <div
       className={
-        "text-2xl py-4 px-2 hover:shadow-md hover:bg-indigo-900" +
-        (activeNavItem === link ? " bg-indigo-900" : "")
+        "text-2xl py-4 px-2 " +
+        (activeNavItem === link ? themeClasses.active : themeClasses.button)
       }
       onClick={() => updateActiveNavItem(link)}
     >

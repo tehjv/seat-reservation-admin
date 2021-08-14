@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SelectionProvider from './context/selectionContext';
 
+// Material UI
+import { ThemeProvider } from "@material-ui/core";
+import theme from "./theme/theme";
+import "./theme.scss";
+
 ReactDOM.render(
-  <React.StrictMode>
-    <SelectionProvider>
-      <App />
-    </SelectionProvider>
-  </React.StrictMode>,
+  <SelectionProvider>
+      <ThemeProvider theme={theme}>
+          <App />
+      </ThemeProvider>
+  </SelectionProvider>,
   document.getElementById('root')
 );
 

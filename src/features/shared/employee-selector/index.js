@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Select } from 'semantic-ui-react'
-import SelectionContext from '../../../context/selectionContext'
+// import SelectionContext from '../../../context/selectionContext'
 
 const EmployeeSelector = ({ props }) => {
-    const selection = useContext(SelectionContext);
+    // const selection = useContext(SelectionContext);
 
     let employeeList = [
         { key: '1', value: '1', text: 'John' },
