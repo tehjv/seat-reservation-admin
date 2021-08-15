@@ -5,10 +5,12 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
     input: {
         border: `1px solid ${theme.palette.secondary.light} !important`,
-        opacity: 0.7,
-        '&:hover': {
+        color: `${theme.palette.text.secondary} !important`,
+        padding: "1rem 2rem !important",
+        '&:hover, &:active, &:focus, &:focus-visible': {
             border: `1px solid ${theme.palette.secondary.main} !important`,
-            opacity: 0.9
+            color: `${theme.palette.text.primary} !important`,
+            outline: 'none !important'
         }
     },
     login: {

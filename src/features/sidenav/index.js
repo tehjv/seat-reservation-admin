@@ -2,9 +2,22 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  heading: {
+  header: {
     background: `${theme.palette.primary.dark}`,
-    color: `${theme.palette.primary.contrastText}`
+    color: `${theme.palette.primary.contrastText}`,
+    display: "flex",
+    "flex-direction": "column",
+    "align-items": "center",
+    "justify-content": "center",
+    padding: "2rem 0"
+  },
+  headings: {
+    display: "flex",
+    "flex-direction": "column",
+    "align-items": "flex-start",
+    "justify-content": "center",
+    padding: "0",
+    "margin-left": "-4px"
   },
   button: {
     background: `${theme.palette.primary.light}`,
@@ -55,10 +68,11 @@ const SideNav = ({ navState }) => {
 
   return (
     <div className="grid-cols-1">
-      <div className={"py-8 " + themeClasses.heading}>
-        <h1 className="text-3xl font-bold px-2">Admin Webapp</h1>
-      </div>
-      <hr></hr>
+      <header className={"py-8 " + themeClasses.header}>
+        <div className={themeClasses.headings}>
+          <h1 className="text-3xl font-bold px-2">Administration</h1>
+        </div>
+      </header>
       <div className="nav-group cursor-pointer">
         {navItems.map((navItem, i) => (
           <SideNavItem
