@@ -1,8 +1,78 @@
 import React, { useState } from "react";
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import { DriveEta } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  available: {
+    background: `${theme.palette.reservation.available}`
+  },
+  reserved: {
+    background: `${theme.palette.reservation.reserved}`
+  },
+  disabled: {
+    background: `${theme.palette.reservation.disabled}`
+  },
+  car: {
+    color: `${theme.palette.reservation.text.light}`
+  },
+  button: {
+    background: `${theme.palette.primary.main} !important`,
+    border: `1px solid ${theme.palette.primary.light} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
+    padding: ".88rem 1.6rem !important",
+    '&:hover, &:active, &:focus, &:focus-visible': {
+        background: `${theme.palette.primary.dark} !important`,
+        border: `1px solid ${theme.palette.primary.main} !important`,
+        color: `${theme.palette.primary.contrastText} !important`,
+        outline: 'none !important'
+    },
+    "&[disabled], &[disabled].reserve": {
+        background: `${theme.palette.background.default} !important`,
+        border: `1px solid ${theme.palette.background.light} !important`,
+        color: `${theme.palette.background.dark} !important`,
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.background.default} !important`,
+            border: `1px solid ${theme.palette.background.light} !important`,
+            color: `${theme.palette.background.dark} !important`,
+            outline: 'none !important'
+        },
+    },
+    "&.reserve": {
+        background: `${theme.palette.secondary.main} !important`,
+        border: `1px solid ${theme.palette.secondary.light} !important`,
+        color: `${theme.palette.secondary.contrastText} !important`,
+        "margin-left": "4px",
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.secondary.dark} !important`,
+            border: `1px solid ${theme.palette.secondary.main} !important`,
+            color: `${theme.palette.secondary.contrastText} !important`,
+            outline: 'none !important'
+        }
+    },
+    "&.cancel": {
+        background: `${theme.palette.error.main} !important`,
+        border: `1px solid ${theme.palette.error.light} !important`,
+        color: `${theme.palette.error.contrastText} !important`,
+        "margin-right": "4px",
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.error.dark} !important`,
+            border: `1px solid ${theme.palette.error.main} !important`,
+            color: `${theme.palette.error.contrastText} !important`,
+            outline: 'none !important'
+        }
+    }
+  },
+  icon: {
+    height: "4rem",
+    width: "auto",
+    margin: "2rem 0"
+  }
+}));
 
 const ParkSlot = ({ props }) => {
+  const themeClasses = useStyles();
   const [modalIsOpen, setIsOpen] = useState(false);
   const customStyles = {
     content: {
@@ -34,8 +104,8 @@ const ParkSlot = ({ props }) => {
     Reserved: 1,
   };
   const colors = [
-    "border-indigo-700 bg-indigo-500",
-    "border-red-700 bg-red-500",
+    themeClasses.available,
+    themeClasses.reserved,
   ];
 
   Modal.setAppElement('#mainApp');
@@ -46,14 +116,10 @@ const ParkSlot = ({ props }) => {
         onClick={openModal}
         className={
           "border-4 flex justify-center items-center cursor-pointer " +
-          colors[ParkingStatus[props.status]]
+          colors[ParkingStatus[props.status]] + " " + themeClasses.car
         }
       >
-        <img
-          className="m-auto h-1/2"
-          alt="parking logo"
-          src={"/logos/parking.png"}
-        ></img>
+        <DriveEta className={themeClasses.icon} />
 
       </div>
       <Modal
@@ -66,8 +132,8 @@ const ParkSlot = ({ props }) => {
         <label>{"Capacity: " + props.capacity}</label>
         <label>{"Reserved by: " + (props.reservedBy ? props.reservedBy : "N/A")}</label>
         <div className="flex w-full mt-8 justify-between">
-          <button className="self-center py-1 px-2 text-white bg-red-700 rounded" onClick={closeModal}>Cancel</button>
-          {!props.reservedBy && <button className="self-center py-1 px-2 text-white bg-indigo-700 rounded" onClick={reserve}>Reserve</button>}
+          <button className={"rounded cancel " + themeClasses.button} onClick={closeModal}>Cancel</button>
+          <button disabled={props.reservedBy} className={"rounded reserve " + themeClasses.button} onClick={reserve}>Reserve</button>
         </div>
       </Modal>
     </div>
@@ -75,6 +141,7 @@ const ParkSlot = ({ props }) => {
 };
 
 const Parking = ({ data }) => {
+  const themeClasses = useStyles();
   const parkingData = [
     { status: "Reserved", capacity: "Big Cars", reservedBy: "John", id: "1" },
     { status: "Reserved", capacity: "Big Cars", reservedBy: "Dan", id: "2" },
@@ -85,11 +152,11 @@ const Parking = ({ data }) => {
   ];
   const statusLegends = [
     {
-      color: "border-indigo-700 bg-indigo-500",
+      color: themeClasses.available,
       status: "Available",
     },
     {
-      color: "border-red-700 bg-red-500",
+      color: themeClasses.reserved,
       status: "Reserved",
     },
   ];

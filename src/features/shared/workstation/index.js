@@ -3,8 +3,89 @@ import PropTypes from "prop-types";
 import Modal from 'react-modal';
 import WorkstationStatus from '../../../constants/WorkstationStatus';
 import EmployeeSelector from "../employee-selector";
+import {
+  BorderAll,
+  Apple,
+  LaptopWindows,
+  LaptopChromebook,
+  CancelPresentation,
+  NotInterested
+} from '@material-ui/icons';
+import { makeStyles } from "@material-ui/core/styles";
+import WorkstationType from "../../../constants/WorkstationType";
+
+const useStyles = makeStyles((theme) => ({
+  available: {
+    background: `${theme.palette.reservation.available}`,
+    color: `${theme.palette.reservation.text.light}`
+  },
+  reserved: {
+    background: `${theme.palette.reservation.reserved}`,
+    color: `${theme.palette.reservation.text.light}`
+  },
+  disabled: {
+    background: `${theme.palette.reservation.disabled}`,
+    color: `${theme.palette.reservation.text.dark}`
+  },
+  flex: {
+    display: 'flex',
+    'align-items': 'center',
+    'justify-content': 'center'
+  },
+  button: {
+    background: `${theme.palette.primary.main} !important`,
+    border: `1px solid ${theme.palette.primary.light} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
+    padding: ".88rem 1.6rem !important",
+    '&:hover, &:active, &:focus, &:focus-visible': {
+        background: `${theme.palette.primary.dark} !important`,
+        border: `1px solid ${theme.palette.primary.main} !important`,
+        color: `${theme.palette.primary.contrastText} !important`,
+        outline: 'none !important'
+    },
+    "&[disabled], &[disabled].reserve": {
+        background: `${theme.palette.background.default} !important`,
+        border: `1px solid ${theme.palette.background.light} !important`,
+        color: `${theme.palette.background.dark} !important`,
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.background.default} !important`,
+            border: `1px solid ${theme.palette.background.light} !important`,
+            color: `${theme.palette.background.dark} !important`,
+            outline: 'none !important'
+        },
+    },
+    "&.reserve": {
+        background: `${theme.palette.secondary.main} !important`,
+        border: `1px solid ${theme.palette.secondary.light} !important`,
+        color: `${theme.palette.secondary.contrastText} !important`,
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.secondary.dark} !important`,
+            border: `1px solid ${theme.palette.secondary.main} !important`,
+            color: `${theme.palette.secondary.contrastText} !important`,
+            outline: 'none !important'
+        }
+    },
+    "&.cancel": {
+        background: `${theme.palette.error.main} !important`,
+        border: `1px solid ${theme.palette.error.light} !important`,
+        color: `${theme.palette.error.contrastText} !important`,
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.error.dark} !important`,
+            border: `1px solid ${theme.palette.error.main} !important`,
+            color: `${theme.palette.error.contrastText} !important`,
+            outline: 'none !important'
+        }
+    }
+  },
+  icon: {
+    height: "2.5rem",
+    width: "auto",
+    margin: "0"
+  }
+}));
 
 const Workstation = ({ props }) => {
+  const themeClasses = useStyles();
   const [modalIsOpen, setIsOpen] = useState(false);
   const customStyles = {
     content: {
@@ -45,26 +126,17 @@ const Workstation = ({ props }) => {
     props.selectionUpdater(newSelection);
   }
 
-  function dontPropagate(e) {
+  function doNotPropagate(e) {
     e.stopPropagation();
   }
 
   Modal.setAppElement('#mainApp');
 
-
-  const logos = [
-    "windows.png",
-    "apple.png",
-    "new_dock.png",
-    "old_dock.png",
-    "wall.png",
-    "empty.png",
-  ];
   const colors = [
-    "border-indigo-700 bg-indigo-500",
-    "border-red-700 bg-red-500",
-    "border-gray-700 bg-gray-500",
-    "border-gray-300 bg-gray-100",
+    themeClasses.available,
+    themeClasses.reserved,
+    themeClasses.disabled,
+    themeClasses.disabled
   ];
   return (
     <>
@@ -73,16 +145,22 @@ const Workstation = ({ props }) => {
           <div
             onClick={() => { (props.status === WorkstationStatus.AVAILABLE || props.status === WorkstationStatus.RESERVED) && openModal() }}
             className={
-              "flex flex-col relative border-2 h-16 w-24 cursor-pointer " +
-              colors[props.status]
+              "flex flex-col relative rounded border-2 h-20 w-28 cursor-pointer " +
+              colors[props.status] + " " + themeClasses.flex
             }
           >
-            {props.selectionUpdater && <input onChange={handleSelect} onClick={dontPropagate} className="absolute top-1 right-1" type="checkbox"></input>}
-            <img
+            {props.selectionUpdater && <input onChange={handleSelect} onClick={doNotPropagate} className="absolute top-1 right-1" type="checkbox"></input>}
+            {/* <img
               className="m-auto h-1/2 select-none"
               alt="workstation logo"
               src={"/logos/" + logos[props.type]}
-            ></img>
+            ></img> */}
+            {props.type === WorkstationType.WINDOWS && <BorderAll className={themeClasses.icon} /> }
+            {props.type === WorkstationType.APPLE && <Apple className={themeClasses.icon} /> }
+            {props.type === WorkstationType.NEWDOCK && <LaptopWindows className={themeClasses.icon} /> }
+            {props.type === WorkstationType.OLDDOCK && <LaptopChromebook className={themeClasses.icon} /> }
+            {props.type === WorkstationType.WALL && <CancelPresentation className={themeClasses.icon} /> }
+            {props.type === WorkstationType.NONE && <NotInterested className={themeClasses.icon} /> }
             {props.showTeamReservation && <label className="self-center">{props.reservedByTeam}</label>}
           </div>
           <Modal
@@ -97,14 +175,14 @@ const Workstation = ({ props }) => {
             <label>{"Network Ports: " + props.ports}</label>
             <label>{"Reserved by: " + (props.reservedBy ? props.reservedBy : "N/A")}</label>
             <div className="flex w-full mt-8 justify-between flex-grow-2 items-end">
-              <button className="py-1 px-2 text-white bg-red-700 rounded" onClick={closeModal}>Cancel</button>
+              <button className={"rounded cancel " + themeClasses.button} onClick={closeModal}>Cancel</button>
               <EmployeeSelector></EmployeeSelector>
-              {!props.reservedBy && <button className="py-1 px-2 text-white bg-indigo-700 rounded" onClick={reserve}>Reserve</button>}
+              <button disabled={props.reservedBy} className={"rounded reserve " + themeClasses.button} onClick={reserve}>Reserve</button>
             </div>
           </Modal>
         </div>
       ) : (
-        <div className="border-2 h-16 w-24"></div>
+        <div className="border-2 h-20 w-28"></div>
       )
       }
     </>

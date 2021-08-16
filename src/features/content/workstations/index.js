@@ -4,9 +4,88 @@ import Sector from "../../shared/sector";
 import Modal from 'react-modal';
 import DatePicker from "react-datepicker";
 import { workStationsSectorData } from "./test-data";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  available: {
+    background: `${theme.palette.reservation.available}`
+  },
+  reserved: {
+    background: `${theme.palette.reservation.reserved}`
+  },
+  disabled: {
+    background: `${theme.palette.reservation.disabled}`
+  },
+  select: {
+    border: `1px solid ${theme.palette.secondary.light} !important`,
+    color: `${theme.palette.text.select} !important`,
+    padding: ".88rem 1.6rem !important",
+    '&:hover, &:active, &:focus, &:focus-visible': {
+        border: `1px solid ${theme.palette.secondary.main} !important`,
+        color: `${theme.palette.text.primary} !important`,
+        outline: 'none !important'
+    }
+  },
+  button: {
+    background: `${theme.palette.primary.main} !important`,
+    border: `1px solid ${theme.palette.primary.light} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
+    padding: ".88rem 1.6rem !important",
+    '&:hover, &:active, &:focus, &:focus-visible': {
+        background: `${theme.palette.primary.dark} !important`,
+        border: `1px solid ${theme.palette.primary.main} !important`,
+        color: `${theme.palette.primary.contrastText} !important`,
+        outline: 'none !important'
+    },
+    "&[disabled], &[disabled].reserve": {
+        background: `${theme.palette.background.default} !important`,
+        border: `1px solid ${theme.palette.background.light} !important`,
+        color: `${theme.palette.background.dark} !important`,
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.background.default} !important`,
+            border: `1px solid ${theme.palette.background.light} !important`,
+            color: `${theme.palette.background.dark} !important`,
+            outline: 'none !important'
+        },
+    },
+    "&.reserve, &.edit": {
+        background: `${theme.palette.secondary.main} !important`,
+        border: `1px solid ${theme.palette.secondary.light} !important`,
+        color: `${theme.palette.secondary.contrastText} !important`,
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.secondary.dark} !important`,
+            border: `1px solid ${theme.palette.secondary.main} !important`,
+            color: `${theme.palette.secondary.contrastText} !important`,
+            outline: 'none !important'
+        }
+    },
+    "&.cancel": {
+        background: `${theme.palette.error.main} !important`,
+        border: `1px solid ${theme.palette.error.light} !important`,
+        color: `${theme.palette.error.contrastText} !important`,
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.error.dark} !important`,
+            border: `1px solid ${theme.palette.error.main} !important`,
+            color: `${theme.palette.error.contrastText} !important`,
+            outline: 'none !important'
+        }
+    }
+  },
+  input: {
+    border: `1px solid ${theme.palette.secondary.light} !important`,
+    color: `${theme.palette.text.secondary} !important`,
+    padding: ".88rem 1.6rem !important",
+    '&:hover, &:active, &:focus, &:focus-visible': {
+        border: `1px solid ${theme.palette.secondary.main} !important`,
+        color: `${theme.palette.text.primary} !important`,
+        outline: 'none !important'
+    }
+  }
+}));
 
 const Workstations = ({ data }) => {
-    const [floorPlan, setFloorPlan] = useState(workStationsSectorData);
+    const themeClasses = useStyles();
+    const [floorPlan] = useState(workStationsSectorData);
     const [startDate, setStartDate] = useState(new Date());
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState('');
@@ -35,15 +114,15 @@ const Workstations = ({ data }) => {
     const teams = ["CIE", "CA"];
     const statusLegends = [
         {
-            color: "border-indigo-700 bg-indigo-500",
+            color: themeClasses.available,
             status: "Available",
         },
         {
-            color: "border-red-700 bg-red-500",
+            color: themeClasses.reserved,
             status: "Reserved",
         },
         {
-            color: "border-gray-700 bg-gray-500",
+            color: themeClasses.disabled,
             status: "Not Allowed",
         },
     ];
@@ -78,19 +157,19 @@ const Workstations = ({ data }) => {
                 contentLabel="Example Modal"
             >
                 <h1 className="text-xl self-center my-8">Edit Seat Rotation</h1>
-                <div className="mt-8 w-full">
-                    <div className="flex justify-between w-full">
+                <div className="mt-8 flex flex-row flex-wrap w-full my-2">
+                    <div className="flex items-center justify-between w-full">
                         <label>Current Rotation</label>
-                        <select disabled={!editEnabled ? true : null} className="rounded border-2 ">
+                        <select disabled={!editEnabled ? true : null} className={"rounded border-2 " + themeClasses.select}>
                             <option>Odd</option>
                             <option>Even</option>
                         </select>
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex items-center justify-between w-full my-2">
                         <label>Implementation Date</label>
                         <DatePicker
                             disabled={!editEnabled}
-                            className="rounded border-2"
+                            className={"rounded border-2 " + themeClasses.input}
                             placeholderText="Pick a date"
                             selected={startDate}
                             onChange={(date) => {
@@ -98,27 +177,27 @@ const Workstations = ({ data }) => {
                             }}
                         />
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex items-center justify-between w-full my-2">
                         <label>Rotation Basis</label>
-                        <select disabled={!editEnabled ? true : null} className="rounded border-2 ">
+                        <select disabled={!editEnabled ? true : null} className={"rounded border-2 " + themeClasses.select}>
                             <option>Weekly</option>
                             <option>Monthly</option>
                             <option>Daily</option>
                         </select>
                     </div>
                 </div>
-                <div className="flex w-full mt-8 justify-between flex-grow-2 items-end">
-                    <button className="py-1 px-2 text-white bg-red-700 rounded" onClick={() => { disableEdit(); closeModal() }}>Cancel</button>
-                    <button className="py-1 px-2 text-white bg-indigo-700 rounded" onClick={editRotation}>Edit</button>
+                <div className="flex items-center w-full mt-8 justify-between flex-grow-2 items-end">
+                    <button className={"py-1 px-2 rounded cancel " + themeClasses.button} onClick={() => { disableEdit(); closeModal() }}>Cancel</button>
+                    <button className={"py-1 px-2 rounded edit " + themeClasses.button} onClick={editRotation}>Edit</button>
                 </div>
             </Modal>
-            <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto">
+            <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
                 <Sector props={{ ...floorPlan, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
             </div>
-            <div id="calendarLegendDetails" className="flex">
+            <div id="calendarLegendDetails" className="flex mt-2">
                 {statusLegends.map((legend, i) => (
                     <div key={i} className="flex items-center mr-4">
-                        <div className={"h-4 w-4 mr-1 " + legend.color}></div>
+                        <div className={"h-4 w-4 mr-1 rounded " + legend.color}></div>
                         {legend.status}
                     </div>
                 ))}
@@ -128,13 +207,13 @@ const Workstations = ({ data }) => {
                 className="flex justify-between flex-grow-2 items-end"
             >
                 <div id="leftControls">
-                    <button className="self-center mr-1 py-1 px-2 text-white bg-indigo-700 rounded disabled:opacity-50" onClick={openModal}>Edit Seat Rotation</button>
-                    <select className="rounded border-2">
+                    <button className={"self-center mr-1 py-1 px-2 rounded disabled:opacity-50 " + themeClasses.button} onClick={openModal}>Edit Seat Rotation</button>
+                    <select className={"rounded border-2 " + themeClasses.select}>
                         {floors.map((floor, i) => (
                             <option key={i}>{floor}</option>
                         ))}
                     </select>
-                    {selectedSeats.length > 0 && <select onChange={setSelectedTeam} value={selectedTeam} className="rounded border-2 ">
+                    {selectedSeats.length > 0 && <select onChange={setSelectedTeam} value={selectedTeam} className={"rounded border-2 " + themeClasses.select}>
                         <option value="" disabled>Select team</option>
                         {teams.map((team, i) => (
                             <option key={i}>{team}</option>
@@ -142,7 +221,7 @@ const Workstations = ({ data }) => {
                     </select>}
                 </div>
                 <div id="rightControls">
-                    <button disabled={(selectedSeats.length === 0 || !selectedTeam) ? true : null} className="self-center py-1 px-2 text-white bg-indigo-700 rounded disabled:opacity-50" onClick={reserve}>Reserve</button>
+                    <button disabled={(selectedSeats.length === 0 || !selectedTeam) ? true : null} className={"self-center rounded reserve " + themeClasses.button} onClick={reserve}>Reserve</button>
                 </div>
             </div>
         </div>

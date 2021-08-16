@@ -1,9 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Select } from 'semantic-ui-react'
-import SelectionContext from '../../../context/selectionContext'
+// import SelectionContext from '../../../context/selectionContext'
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  select: {
+    border: `1px solid ${theme.palette.secondary.light} !important`,
+    color: `${theme.palette.text.select} !important`,
+    padding: "1.11rem 1.6rem !important",
+    '&:hover, &:active, &:focus, &:focus-visible': {
+        border: `1px solid ${theme.palette.secondary.main} !important`,
+        color: `${theme.palette.text.primary} !important`,
+        outline: 'none !important'
+    }
+  },
+}));
 
 const EmployeeSelector = ({ props }) => {
-    const selection = useContext(SelectionContext);
+    // const selection = useContext(SelectionContext);
+    const themeClasses = useStyles();
 
     let employeeList = [
         { key: '1', value: '1', text: 'John' },
@@ -23,7 +38,7 @@ const EmployeeSelector = ({ props }) => {
             console.log(e)
             console.log(e.target.value)
             // selection.setLocation(e.target.value)
-        }} options={employeeList} />
+        }} options={employeeList} className={"rounded border-2 " + themeClasses.select} />
     </div>);
 }
 
