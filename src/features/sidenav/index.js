@@ -46,7 +46,11 @@ const SideNav = ({ navState }) => {
     },
     {
       link: "Calendar",
-      label: "Calendar",
+      label: "Individual Reservations",
+    },
+    {
+      link: "Reservations",
+      label: "Team Reservations",
     },
     {
       link: "Workstations",
@@ -54,7 +58,7 @@ const SideNav = ({ navState }) => {
     },
     {
       link: "Parking",
-      label: "Parking",
+      label: "Parkings",
     },
     {
       link: "Settings",

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from 'react-modal';
 import { DriveEta } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+import EmployeeSelector from "../../shared/employee-selector";
 
 const useStyles = makeStyles((theme) => ({
   available: {
@@ -23,45 +24,45 @@ const useStyles = makeStyles((theme) => ({
     color: `${theme.palette.primary.contrastText} !important`,
     padding: ".88rem 1.6rem !important",
     '&:hover, &:active, &:focus, &:focus-visible': {
-        background: `${theme.palette.primary.dark} !important`,
-        border: `1px solid ${theme.palette.primary.main} !important`,
-        color: `${theme.palette.primary.contrastText} !important`,
-        outline: 'none !important'
+      background: `${theme.palette.primary.dark} !important`,
+      border: `1px solid ${theme.palette.primary.main} !important`,
+      color: `${theme.palette.primary.contrastText} !important`,
+      outline: 'none !important'
     },
     "&[disabled], &[disabled].reserve": {
+      background: `${theme.palette.background.default} !important`,
+      border: `1px solid ${theme.palette.background.light} !important`,
+      color: `${theme.palette.background.dark} !important`,
+      '&:hover, &:active, &:focus, &:focus-visible': {
         background: `${theme.palette.background.default} !important`,
         border: `1px solid ${theme.palette.background.light} !important`,
         color: `${theme.palette.background.dark} !important`,
-        '&:hover, &:active, &:focus, &:focus-visible': {
-            background: `${theme.palette.background.default} !important`,
-            border: `1px solid ${theme.palette.background.light} !important`,
-            color: `${theme.palette.background.dark} !important`,
-            outline: 'none !important'
-        },
+        outline: 'none !important'
+      },
     },
     "&.reserve": {
-        background: `${theme.palette.secondary.main} !important`,
-        border: `1px solid ${theme.palette.secondary.light} !important`,
+      background: `${theme.palette.secondary.main} !important`,
+      border: `1px solid ${theme.palette.secondary.light} !important`,
+      color: `${theme.palette.secondary.contrastText} !important`,
+      "margin-left": "4px",
+      '&:hover, &:active, &:focus, &:focus-visible': {
+        background: `${theme.palette.secondary.dark} !important`,
+        border: `1px solid ${theme.palette.secondary.main} !important`,
         color: `${theme.palette.secondary.contrastText} !important`,
-        "margin-left": "4px",
-        '&:hover, &:active, &:focus, &:focus-visible': {
-            background: `${theme.palette.secondary.dark} !important`,
-            border: `1px solid ${theme.palette.secondary.main} !important`,
-            color: `${theme.palette.secondary.contrastText} !important`,
-            outline: 'none !important'
-        }
+        outline: 'none !important'
+      }
     },
     "&.cancel": {
-        background: `${theme.palette.error.main} !important`,
-        border: `1px solid ${theme.palette.error.light} !important`,
+      background: `${theme.palette.error.main} !important`,
+      border: `1px solid ${theme.palette.error.light} !important`,
+      color: `${theme.palette.error.contrastText} !important`,
+      "margin-right": "4px",
+      '&:hover, &:active, &:focus, &:focus-visible': {
+        background: `${theme.palette.error.dark} !important`,
+        border: `1px solid ${theme.palette.error.main} !important`,
         color: `${theme.palette.error.contrastText} !important`,
-        "margin-right": "4px",
-        '&:hover, &:active, &:focus, &:focus-visible': {
-            background: `${theme.palette.error.dark} !important`,
-            border: `1px solid ${theme.palette.error.main} !important`,
-            color: `${theme.palette.error.contrastText} !important`,
-            outline: 'none !important'
-        }
+        outline: 'none !important'
+      }
     }
   },
   icon: {
@@ -85,6 +86,7 @@ const ParkSlot = ({ props }) => {
       display: 'flex',
       'flexDirection': 'column',
       'alignItems': 'baseline',
+      height: '400px'
     },
   };
   function openModal() {
@@ -128,12 +130,18 @@ const ParkSlot = ({ props }) => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h1 className="text-xl self-center my-8">{"Parking Slot " + props.id}</h1>
-        <label>{"Capacity: " + props.capacity}</label>
-        <label>{"Reserved by: " + (props.reservedBy ? props.reservedBy : "N/A")}</label>
-        <div className="flex w-full mt-8 justify-between">
-          <button className={"rounded cancel " + themeClasses.button} onClick={closeModal}>Cancel</button>
-          <button disabled={props.reservedBy} className={"rounded reserve " + themeClasses.button} onClick={reserve}>Reserve</button>
+        <div className="flex flex-col justify-between h-full">
+          <div>
+            <h1 className="text-xl self-center my-8">{"Parking Slot " + props.id}</h1>
+            <label>{"Capacity: " + props.capacity}</label>
+            <label>{"Reserved by: " + (props.reservedBy ? props.reservedBy : "N/A")}</label>
+          </div>
+
+          <div className="flex w-full mt-8 justify-between">
+            <button className={"rounded cancel " + themeClasses.button} onClick={closeModal}>Cancel</button>
+            <EmployeeSelector></EmployeeSelector>
+            <button disabled={props.reservedBy} className={"rounded reserve " + themeClasses.button} onClick={reserve}>Reserve</button>
+          </div>
         </div>
       </Modal>
     </div>
