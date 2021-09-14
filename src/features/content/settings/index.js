@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
             border: `1px solid ${theme.palette.secondary.main} !important`,
             color: `${theme.palette.text.primary} !important`,
             outline: 'none !important'
-        }
+        },
+        width: '240px'
     },
     button: {
         background: `${theme.palette.primary.main} !important`,
@@ -76,42 +77,37 @@ const useStyles = makeStyles((theme) => ({
             border: `1px solid ${theme.palette.secondary.main} !important`,
             color: `${theme.palette.text.primary} !important`,
             outline: 'none !important'
-        }
+        },
+        width: '240px'
     }
 }));
 
 const Settings = ({ data }) => {
     const themeClasses = useStyles();
-    const [editEnabled, toggleEdit] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
 
-    function editRotation() {
-        toggleEdit(true);
-    }
-
-    function disableEdit() {
-        toggleEdit(false);
-    }
-
     function updateRotation() {
-        disableEdit();
+        return;
     }
 
     return (
         <div className="p-8">
             <h1 className="text-4xl font-bold mb-8">Edit Seat Rotation</h1>
             <div className="mt-8 flex flex-row flex-wrap w-full my-2">
-                <div className="flex items-center justify-between w-full">
+                <div className="flex items-center w-full">
                     <label>Current Rotation</label>
-                    <select disabled={!editEnabled ? true : null} className={"rounded border-2 " + themeClasses.select}>
+                </div>
+                <div className="flex items-center w-full mb-4">
+                <select className={"rounded border-2 " + themeClasses.select}>
                         <option>Odd</option>
                         <option>Even</option>
                     </select>
                 </div>
-                <div className="flex items-center justify-between w-full my-2">
+                <div className="flex items-center w-full">
                     <label>Implementation Date</label>
+                </div>
+                <div className="flex items-center w-full mb-4">
                     <DatePicker
-                        disabled={!editEnabled}
                         className={"rounded border-2 " + themeClasses.input}
                         placeholderText="Pick a date"
                         selected={startDate}
@@ -120,9 +116,11 @@ const Settings = ({ data }) => {
                         }}
                     />
                 </div>
-                <div className="flex items-center justify-between w-full my-2">
+                <div className="flex items-center w-full">
                     <label>Rotation Basis</label>
-                    <select disabled={!editEnabled ? true : null} className={"rounded border-2 " + themeClasses.select}>
+                </div>
+                <div className="flex items-center w-full mb-4">
+                    <select className={"rounded border-2 " + themeClasses.select}>
                         <option>Weekly</option>
                         <option>Monthly</option>
                         <option>Daily</option>
@@ -133,21 +131,9 @@ const Settings = ({ data }) => {
                 id="editRotationControls"
                 className="flex justify-between flex-grow-2 items-end"
             >
-                {
-                    !editEnabled && (
-                        <div id="leftControls">
-                            <button className={"py-1 px-2 rounded edit " + themeClasses.button} onClick={editRotation}>Edit</button>
-                        </div>
-                    )
-                }
-                {
-                    editEnabled && (
-                        <div id="rightControls" className="flex">
-                            <button className={"rounded cancel mr-2 " + themeClasses.button} onClick={disableEdit}>Cancel</button>
-                            <button className={"rounded update " + themeClasses.button} onClick={updateRotation}>Update</button>
-                        </div>
-                    )
-                }
+                <div id="rightControls" className="flex">
+                    <button className={"rounded update " + themeClasses.button} onClick={updateRotation}>Save settings</button>
+                </div>
             </div>
         </div>
     );

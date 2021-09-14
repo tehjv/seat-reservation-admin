@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
             color: `${theme.palette.primary.contrastText} !important`,
             outline: 'none !important'
         },
-        "&[disabled], &[disabled].reserve": {
+        "&[disabled], &[disabled].delete, &[disabled].reserve": {
             background: `${theme.palette.background.default} !important`,
             border: `1px solid ${theme.palette.background.light} !important`,
             color: `${theme.palette.background.dark} !important`,
@@ -139,7 +139,7 @@ const Workstations = ({ data }) => {
                 </div>
                 <div id="rightControls">
                     <button className={"rounded add mr-2 " + themeClasses.button} onClick={addWorkstation}>Add</button>
-                    <button disabled={selectedSeats.length > 0 ? null : true} className={"rounded cancel " + themeClasses.button} onClick={deleteWorkstation}>Delete</button>
+                    <button disabled={selectedSeats.length > 0 ? null : true} className={"rounded cancel delete " + themeClasses.button} onClick={deleteWorkstation}>Delete</button>
                 </div>
             </div>
         </div>
