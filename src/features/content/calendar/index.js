@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Sector from "../../shared/sector";
-import { noStatusSectordata, withStatusSectordata } from "./test-data";
+import { noStatusSectordata, noStatusSectordata2, withStatusSectordata, withStatusSectordata2 } from "../../../test-data/test-data";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
     color: `${theme.palette.text.secondary} !important`,
     padding: ".88rem 1.6rem !important",
     '&:hover, &:active, &:focus, &:focus-visible': {
-        border: `1px solid ${theme.palette.secondary.main} !important`,
-        color: `${theme.palette.text.primary} !important`,
-        outline: 'none !important'
+      border: `1px solid ${theme.palette.secondary.main} !important`,
+      color: `${theme.palette.text.primary} !important`,
+      outline: 'none !important'
     }
   },
   select: {
@@ -30,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
     color: `${theme.palette.text.select} !important`,
     padding: ".88rem 1.6rem !important",
     '&:hover, &:active, &:focus, &:focus-visible': {
-        border: `1px solid ${theme.palette.secondary.main} !important`,
-        color: `${theme.palette.text.primary} !important`,
-        outline: 'none !important'
+      border: `1px solid ${theme.palette.secondary.main} !important`,
+      color: `${theme.palette.text.primary} !important`,
+      outline: 'none !important'
     }
   }
 }));
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const Calendar = ({ data }) => {
   const themeClasses = useStyles();
   const [startDate, setStartDate] = useState(null);
-  const [floorPlan, setFloorPlan] = useState(noStatusSectordata);
+  const [floorPlan, setFloorPlan] = useState([noStatusSectordata, noStatusSectordata2]);
   const floors = ["Floor 15", "Floor 16"];
   const statusLegends = [
     {
@@ -60,7 +60,9 @@ const Calendar = ({ data }) => {
   return (
     <div id="calendar" className="p-8 h-full flex flex-col">
       <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
-        <Sector props={{ ...floorPlan }} />
+        {floorPlan.map((sector, i) => (
+          <Sector key={i} props={{ ...sector }} />
+        ))}
       </div>
       <div id="calendarLegendDetails" className="flex mt-2">
         {statusLegends.map((legend, i) => (
@@ -91,7 +93,7 @@ const Calendar = ({ data }) => {
               console.log("changing floor plan");
               console.log("new", withStatusSectordata);
               // floorPlanData = withStatusSectordata;
-              setFloorPlan(withStatusSectordata);
+              setFloorPlan([withStatusSectordata, withStatusSectordata2]);
             }}
           />
         </div>

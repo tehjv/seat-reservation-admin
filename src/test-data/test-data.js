@@ -1,5 +1,5 @@
-import WorkstationStatus from "../../../constants/WorkstationStatus";
-import WorkstationType from "../../../constants/WorkstationType";
+import WorkstationStatus from "../constants/WorkstationStatus";
+import WorkstationType from "../constants/WorkstationType";
 
 const noStatusRowAllTypesData = [
   {
@@ -285,6 +285,23 @@ export const noStatusSectordata = {
   sectorBays: [
     { bayLabel: "Bay 1", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
     { bayLabel: "Bay 2", bayRows: [noStatusRowData, noStatusRowData] },
+    { bayLabel: "Bay 3", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
+    { bayLabel: "Bay 4", bayRows: [noStatusRowData, noStatusRowData] },
+    { bayLabel: "Bay 5", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
+    { bayLabel: "Bay 6", bayRows: [noStatusRowData, noStatusRowData] },
+    { bayLabel: "Bay 7", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
+    { bayLabel: "Bay 8", bayRows: [noStatusRowData, noStatusRowData] },
+    { bayLabel: "Bay 9", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
+    { bayLabel: "Bay 10", bayRows: [noStatusRowData, noStatusRowData] },
+  ],
+};
+
+export const noStatusSectordata2 = {
+  sectorLabel: "Sector 2",
+  sectorBays: [
+    { bayLabel: "Bay 1", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
+    { bayLabel: "Bay 2", bayRows: [noStatusRowData, noStatusRowData] },
+    { bayLabel: "Bay 3", bayRows: [noStatusRowAllTypesData, noStatusRowData] }
   ],
 };
 
@@ -295,6 +312,59 @@ export const withStatusSectordata = {
       bayLabel: "Bay 1",
       bayRows: [withStatusRowAllTypesData, withStatusRowData1],
     },
-    { bayLabel: "Bay 2", bayRows: [withStatusRowData2, withStatusRowData3] },
+    {
+      bayLabel: "Bay 2",
+      bayRows: [withStatusRowData2, withStatusRowData3]
+    },
+    {
+      bayLabel: "Bay 3",
+      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
+    },
+    {
+      bayLabel: "Bay 4",
+      bayRows: [withStatusRowData2, withStatusRowData3]
+    },
+    {
+      bayLabel: "Bay 5",
+      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
+    },
+    {
+      bayLabel: "Bay 6",
+      bayRows: [withStatusRowData2, withStatusRowData3]
+    },
+    {
+      bayLabel: "Bay 7",
+      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
+    },
+    {
+      bayLabel: "Bay 8",
+      bayRows: [withStatusRowData2, withStatusRowData3]
+    },
+    {
+      bayLabel: "Bay 9",
+      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
+    },
+    {
+      bayLabel: "Bay 10",
+      bayRows: [withStatusRowData2, withStatusRowData3]
+    },
+  ],
+};
+
+export const withStatusSectordata2 = {
+  sectorLabel: "Sector 2",
+  sectorBays: [
+    {
+      bayLabel: "Bay 11",
+      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
+    },
+    {
+      bayLabel: "Bay 12",
+      bayRows: [withStatusRowData2, withStatusRowData3]
+    },
+    {
+      bayLabel: "Bay 13",
+      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
+    }
   ],
 };

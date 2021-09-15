@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Sector from "../../shared/sector";
-import { noStatusSectordata } from "./test-data";
+import { noStatusSectordata, noStatusSectordata2 } from "../../../test-data/test-data";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Workstations = ({ data }) => {
     const themeClasses = useStyles();
-    const [floorPlan, setFloorPlan] = useState(noStatusSectordata);
+    const [floorPlan, setFloorPlan] = useState([noStatusSectordata, noStatusSectordata2]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const updateSelectedSeats = (seats) => {
         setSelectedSeats(seats);
@@ -116,7 +116,9 @@ const Workstations = ({ data }) => {
     return (
         <div id="calendar" className="p-8 h-full flex flex-col">
             <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
-                <Sector props={{ ...floorPlan, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
+                {floorPlan.map((sector, i) => (
+                    <Sector key={i} props={{ ...sector, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
+                ))}
             </div>
             <div id="calendarLegendDetails" className="flex mt-2">
                 {statusLegends.map((legend, i) => (
