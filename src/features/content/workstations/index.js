@@ -3,6 +3,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import Sector from "../../shared/sector";
 import { noStatusSectordata, noStatusSectordata2 } from "../../../test-data/test-data";
 import { makeStyles } from "@material-ui/core/styles";
+import Modal from 'react-modal';
+import { Input } from 'semantic-ui-react'
 
 const useStyles = makeStyles((theme) => ({
     available: {
@@ -86,6 +88,8 @@ const Workstations = ({ data }) => {
     const themeClasses = useStyles();
     const [floorPlan, setFloorPlan] = useState([noStatusSectordata, noStatusSectordata2]);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [newSeat, setNewSeat] = useState(null);
     const updateSelectedSeats = (seats) => {
         setSelectedSeats(seats);
     };
@@ -105,6 +109,30 @@ const Workstations = ({ data }) => {
         },
     ];
 
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            display: 'flex',
+            'flexDirection': 'column',
+            'alignItems': 'baseline',
+            height: '450px',
+            width: '500px'
+        },
+    };
+
     function deleteWorkstation() {
 
     }
@@ -115,6 +143,43 @@ const Workstations = ({ data }) => {
 
     return (
         <div id="calendar" className="p-8 h-full flex flex-col">
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <h1 className="text-4xl font-bold mb-8">Add New Seat</h1>
+                <div className="mt-8 flex flex-row flex-wrap w-full my-2">
+                    <div className="flex items-center w-full">
+                        <label>Number of Monitor:</label>
+                    </div>
+                    <div className="flex items-center w-full mb-4">
+                        <input className={"rounded border-2 " + themeClasses.select} type="number" placeholder='Enter number' />
+                    </div>
+                    <div className="flex items-center w-full">
+                        <label>Type:</label>
+                    </div>
+                    <div className="flex items-center w-full mb-4">
+                        <select className={"rounded border-2 " + themeClasses.select}>
+                            <option>Windows</option>
+                            <option>Apple</option>
+                            <option>New Docking</option>
+                            <option>Old Docking</option>
+                        </select>
+                    </div>
+                    <div className="flex items-center w-full">
+                        <label>Ports:</label>
+                    </div>
+                    <div className="flex items-center w-full mb-4">
+                        <input className={"rounded border-2 " + themeClasses.select} type="text" placeholder='Enter value' />
+                    </div>
+                    <div className="flex w-full mt-8 justify-between flex-grow-2 items-end">
+                        <button className={"rounded cancel " + themeClasses.button} onClick={closeModal}>Cancel</button>
+                        <button className={"rounded reserve " + themeClasses.button}>Add</button>
+                    </div>
+                </div>
+            </Modal>
             <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
                 {floorPlan.map((sector, i) => (
                     <Sector key={i} props={{ ...sector, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
@@ -140,7 +205,7 @@ const Workstations = ({ data }) => {
                     </select>
                 </div>
                 <div id="rightControls">
-                    <button className={"rounded add mr-2 " + themeClasses.button} onClick={addWorkstation}>Add</button>
+                    <button className={"rounded add mr-2 " + themeClasses.button} onClick={openModal}>Add</button>
                     <button disabled={selectedSeats.length > 0 ? null : true} className={"rounded cancel delete " + themeClasses.button} onClick={deleteWorkstation}>Delete</button>
                 </div>
             </div>
