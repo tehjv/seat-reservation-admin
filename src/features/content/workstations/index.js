@@ -4,7 +4,6 @@ import Sector from "../../shared/sector";
 import { noStatusSectordata, noStatusSectordata2 } from "../../../test-data/test-data";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from 'react-modal';
-import { Input } from 'semantic-ui-react'
 
 const useStyles = makeStyles((theme) => ({
     available: {
@@ -180,6 +179,22 @@ const Workstations = ({ data }) => {
                     </div>
                 </div>
             </Modal>
+            <div
+                id="workstationsControls"
+                className="flex justify-start flex-grow-2 items-start"
+            >
+                <div id="leftControls" className="mr-2">
+                    <select className={"rounded border-2 px-2 py-3 " + themeClasses.select}>
+                        {floors.map((floor, i) => (
+                            <option key={i}>{floor}</option>
+                        ))}
+                    </select>
+                </div>
+                <div id="rightControls">
+                    <button className={"rounded add mr-2 " + themeClasses.button} onClick={openModal}>Add</button>
+                    <button disabled={selectedSeats.length > 0 ? null : true} className={"rounded cancel delete " + themeClasses.button} onClick={deleteWorkstation}>Delete</button>
+                </div>
+            </div>
             <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
                 {floorPlan.map((sector, i) => (
                     <Sector key={i} props={{ ...sector, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
@@ -192,22 +207,6 @@ const Workstations = ({ data }) => {
                         {legend.status}
                     </div>
                 ))}
-            </div>
-            <div
-                id="calendarControls"
-                className="flex justify-between flex-grow-2 items-end"
-            >
-                <div id="leftControls">
-                    <select className={"rounded border-2 px-2 py-3 " + themeClasses.select}>
-                        {floors.map((floor, i) => (
-                            <option key={i}>{floor}</option>
-                        ))}
-                    </select>
-                </div>
-                <div id="rightControls">
-                    <button className={"rounded add mr-2 " + themeClasses.button} onClick={openModal}>Add</button>
-                    <button disabled={selectedSeats.length > 0 ? null : true} className={"rounded cancel delete " + themeClasses.button} onClick={deleteWorkstation}>Delete</button>
-                </div>
             </div>
         </div>
     );

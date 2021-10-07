@@ -5,88 +5,88 @@ import { workStationsSectorData } from "./test-data";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  available: {
-    background: `${theme.palette.reservation.available}`
-  },
-  reserved: {
-    background: `${theme.palette.reservation.reserved}`
-  },
-  disabled: {
-    background: `${theme.palette.reservation.disabled}`
-  },
-  select: {
-    border: `1px solid ${theme.palette.secondary.light} !important`,
-    color: `${theme.palette.text.select} !important`,
-    padding: ".88rem 1.6rem !important",
-    '&:hover, &:active, &:focus, &:focus-visible': {
-        border: `1px solid ${theme.palette.secondary.main} !important`,
-        color: `${theme.palette.text.primary} !important`,
-        outline: 'none !important'
-    }
-  },
-  button: {
-    background: `${theme.palette.primary.main} !important`,
-    border: `1px solid ${theme.palette.primary.light} !important`,
-    color: `${theme.palette.primary.contrastText} !important`,
-    padding: ".88rem 1.6rem !important",
-    '&:hover, &:active, &:focus, &:focus-visible': {
-        background: `${theme.palette.primary.dark} !important`,
-        border: `1px solid ${theme.palette.primary.main} !important`,
-        color: `${theme.palette.primary.contrastText} !important`,
-        outline: 'none !important'
+    available: {
+        background: `${theme.palette.reservation.available}`
     },
-    "&[disabled], &[disabled].reserve": {
-        background: `${theme.palette.background.default} !important`,
-        border: `1px solid ${theme.palette.background.light} !important`,
-        color: `${theme.palette.background.dark} !important`,
+    reserved: {
+        background: `${theme.palette.reservation.reserved}`
+    },
+    disabled: {
+        background: `${theme.palette.reservation.disabled}`
+    },
+    select: {
+        border: `1px solid ${theme.palette.secondary.light} !important`,
+        color: `${theme.palette.text.select} !important`,
+        padding: ".88rem 1.6rem !important",
         '&:hover, &:active, &:focus, &:focus-visible': {
+            border: `1px solid ${theme.palette.secondary.main} !important`,
+            color: `${theme.palette.text.primary} !important`,
+            outline: 'none !important'
+        }
+    },
+    button: {
+        background: `${theme.palette.primary.main} !important`,
+        border: `1px solid ${theme.palette.primary.light} !important`,
+        color: `${theme.palette.primary.contrastText} !important`,
+        padding: ".88rem 1.6rem !important",
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            background: `${theme.palette.primary.dark} !important`,
+            border: `1px solid ${theme.palette.primary.main} !important`,
+            color: `${theme.palette.primary.contrastText} !important`,
+            outline: 'none !important'
+        },
+        "&[disabled], &[disabled].reserve": {
             background: `${theme.palette.background.default} !important`,
             border: `1px solid ${theme.palette.background.light} !important`,
             color: `${theme.palette.background.dark} !important`,
-            outline: 'none !important'
+            '&:hover, &:active, &:focus, &:focus-visible': {
+                background: `${theme.palette.background.default} !important`,
+                border: `1px solid ${theme.palette.background.light} !important`,
+                color: `${theme.palette.background.dark} !important`,
+                outline: 'none !important'
+            },
         },
-    },
-    "&.reserve, &.edit": {
-        background: `${theme.palette.secondary.main} !important`,
-        border: `1px solid ${theme.palette.secondary.light} !important`,
-        color: `${theme.palette.secondary.contrastText} !important`,
-        '&:hover, &:active, &:focus, &:focus-visible': {
-            background: `${theme.palette.secondary.dark} !important`,
-            border: `1px solid ${theme.palette.secondary.main} !important`,
+        "&.reserve, &.edit": {
+            background: `${theme.palette.secondary.main} !important`,
+            border: `1px solid ${theme.palette.secondary.light} !important`,
             color: `${theme.palette.secondary.contrastText} !important`,
-            outline: 'none !important'
+            '&:hover, &:active, &:focus, &:focus-visible': {
+                background: `${theme.palette.secondary.dark} !important`,
+                border: `1px solid ${theme.palette.secondary.main} !important`,
+                color: `${theme.palette.secondary.contrastText} !important`,
+                outline: 'none !important'
+            }
+        },
+        "&.cancel": {
+            background: `${theme.palette.error.main} !important`,
+            border: `1px solid ${theme.palette.error.light} !important`,
+            color: `${theme.palette.error.contrastText} !important`,
+            '&:hover, &:active, &:focus, &:focus-visible': {
+                background: `${theme.palette.error.dark} !important`,
+                border: `1px solid ${theme.palette.error.main} !important`,
+                color: `${theme.palette.error.contrastText} !important`,
+                outline: 'none !important'
+            }
         }
     },
-    "&.cancel": {
-        background: `${theme.palette.error.main} !important`,
-        border: `1px solid ${theme.palette.error.light} !important`,
-        color: `${theme.palette.error.contrastText} !important`,
+    input: {
+        border: `1px solid ${theme.palette.secondary.light} !important`,
+        color: `${theme.palette.text.secondary} !important`,
+        padding: ".88rem 1.6rem !important",
         '&:hover, &:active, &:focus, &:focus-visible': {
-            background: `${theme.palette.error.dark} !important`,
-            border: `1px solid ${theme.palette.error.main} !important`,
-            color: `${theme.palette.error.contrastText} !important`,
+            border: `1px solid ${theme.palette.secondary.main} !important`,
+            color: `${theme.palette.text.primary} !important`,
             outline: 'none !important'
         }
     }
-  },
-  input: {
-    border: `1px solid ${theme.palette.secondary.light} !important`,
-    color: `${theme.palette.text.secondary} !important`,
-    padding: ".88rem 1.6rem !important",
-    '&:hover, &:active, &:focus, &:focus-visible': {
-        border: `1px solid ${theme.palette.secondary.main} !important`,
-        color: `${theme.palette.text.primary} !important`,
-        outline: 'none !important'
-    }
-  }
 }));
 
 const Reservations = ({ data }) => {
     const themeClasses = useStyles();
-    const [floorPlan] = useState(workStationsSectorData);    
+    const [floorPlan] = useState(workStationsSectorData);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState('');
-    
+
     const updateSelectedSeats = (seats) => {
         setSelectedTeam('');
         setSelectedSeats(seats);
@@ -115,20 +115,9 @@ const Reservations = ({ data }) => {
 
     return (
         <div id="calendar" className="p-8 h-full flex flex-col">
-            <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
-                <Sector props={{ ...floorPlan, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
-            </div>
-            <div id="calendarLegendDetails" className="flex mt-2">
-                {statusLegends.map((legend, i) => (
-                    <div key={i} className="flex items-center mr-4">
-                        <div className={"h-4 w-4 mr-1 rounded " + legend.color}></div>
-                        {legend.status}
-                    </div>
-                ))}
-            </div>
             <div
                 id="workstationsControls"
-                className="flex justify-between flex-grow-2 items-end"
+                className="flex justify-start flex-grow-2 items-start"
             >
                 <div id="leftControls">
                     <select className={"rounded border-2 mr-2 " + themeClasses.select}>
@@ -146,6 +135,17 @@ const Reservations = ({ data }) => {
                 <div id="rightControls">
                     <button disabled={(selectedSeats.length === 0 || !selectedTeam) ? true : null} className={"self-center rounded reserve " + themeClasses.button} onClick={reserve}>Reserve</button>
                 </div>
+            </div>
+            <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
+                <Sector props={{ ...floorPlan, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
+            </div>
+            <div id="calendarLegendDetails" className="flex mt-2">
+                {statusLegends.map((legend, i) => (
+                    <div key={i} className="flex items-center mr-4">
+                        <div className={"h-4 w-4 mr-1 rounded " + legend.color}></div>
+                        {legend.status}
+                    </div>
+                ))}
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,13 +27,33 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       background: `${theme.palette.secondary.main}`,
       color: `${theme.palette.secondary.contrastText}`
-    }
+    },
+    userSelect: 'none'
+  },
+  buttonPadded: {
+    background: `${theme.palette.primary.light}`,
+    color: `${theme.palette.primary.contrastText}`,
+    "font-weight": 300,
+    padding: "1rem 3rem",
+    "&:hover": {
+      background: `${theme.palette.secondary.main}`,
+      color: `${theme.palette.secondary.contrastText}`
+    },
+    userSelect: 'none'
   },
   active: {
     background: `${theme.palette.primary.main}`,
     color: `${theme.palette.primary.contrastText}`,
     "font-weight": 600,
     padding: "1rem 1.5rem",
+    userSelect: 'none'
+  },
+  activePadded: {
+    background: `${theme.palette.primary.main}`,
+    color: `${theme.palette.primary.contrastText}`,
+    "font-weight": 600,
+    padding: "1rem 3rem",
+    userSelect: 'none'
   }
 }));
 
@@ -45,12 +65,17 @@ const SideNav = ({ navState }) => {
       label: "Dashboard",
     },
     {
-      link: "Calendar",
-      label: "Individual Reservations",
-    },
-    {
-      link: "Reservations",
-      label: "Team Reservations",
+      label: "Reservations",
+      children: [
+        {
+          link: "Calendar",
+          label: "Individual",
+        },
+        {
+          link: "Reservations",
+          label: "Team",
+        },
+      ]
     },
     {
       link: "Workstations",
@@ -78,32 +103,95 @@ const SideNav = ({ navState }) => {
         </div>
       </header>
       <div className="nav-group cursor-pointer">
-        {navItems.map((navItem, i) => (
-          <SideNavItem
-            key={i}
-            activeNavItem={navState.activeNavItem}
-            updateActiveNavItem={navState.updateActiveNavItem}
-            link={navItem.link}
-            label={navItem.label}
-          />
-        ))}
+        {navItems.map((navItem, i) => {
+          if (navItem.link) {
+            return (
+              <SideNavItem
+                key={i}
+                activeNavItem={navState.activeNavItem}
+                updateActiveNavItem={navState.updateActiveNavItem}
+                link={navItem.link}
+                label={navItem.label}
+                pad={false}
+              />
+            );
+          } else {
+            return (
+              <SideNavItemWithChildren
+                key={i}
+                label={navItem.label}
+                children={navItem.children}
+                activeNavItem={navState.activeNavItem}
+                updateActiveNavItem={navState.updateActiveNavItem}
+                parentKey={i}
+              />
+            );
+          }
+        })}
       </div>
     </div>
   );
 };
 
-const SideNavItem = ({ activeNavItem, updateActiveNavItem, link, label }) => {
+const SideNavItem = ({ activeNavItem, updateActiveNavItem, link, label, pad }) => {
   const themeClasses = useStyles();
 
   return (
     <div
       className={
         "text-2xl py-4 px-2 " +
-        (activeNavItem === link ? themeClasses.active : themeClasses.button)
+        (activeNavItem === link ?
+          (pad ? themeClasses.activePadded : themeClasses.active) :
+          (pad ? themeClasses.buttonPadded : themeClasses.button)
+        )
       }
       onClick={() => updateActiveNavItem(link)}
     >
       {label}
+    </div>
+  );
+};
+
+const SideNavItemWithChildren = ({ label, children, parentKey, activeNavItem, updateActiveNavItem }) => {
+  const themeClasses = useStyles();
+  const childrenLinks = children.map(child => child.link);
+  const [showChildren, setshowChildren] = useState(false);
+  const [isChildSelected, setIsChildSelected] = useState(false);
+  const updateShowChildren = () => {
+    if (!isChildSelected) {
+      setshowChildren(!showChildren);
+    }
+  };
+  const updateIsChildSelected = (activeNavItem) => {
+    setIsChildSelected(childrenLinks.includes(activeNavItem));
+  };
+
+  useEffect(() => {
+    updateIsChildSelected(activeNavItem);
+  });
+
+  // updateIsChildSelected(activeNavItem);
+
+  return (
+    <div>
+      <div
+        onClick={() => updateShowChildren()}
+        className={"text-2xl py-4 px-2 " + (themeClasses.button)}
+      >
+        {label + (showChildren ? '▴' : '▾')}
+      </div>
+      {showChildren && <div>
+        {children.map((navItem, j) => (
+          <SideNavItem
+            key={parentKey.toString() + j}
+            activeNavItem={activeNavItem}
+            updateActiveNavItem={updateActiveNavItem}
+            link={navItem.link}
+            label={navItem.label}
+            pad={true}
+          />
+        ))}
+      </div>}
     </div>
   );
 };

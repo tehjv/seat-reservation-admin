@@ -4,16 +4,16 @@ import { Select } from 'semantic-ui-react'
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  select: {
-    border: `1px solid ${theme.palette.secondary.light} !important`,
-    color: `${theme.palette.text.select} !important`,
-    padding: "1.11rem 1.6rem !important",
-    '&:hover, &:active, &:focus, &:focus-visible': {
-        border: `1px solid ${theme.palette.secondary.main} !important`,
-        color: `${theme.palette.text.primary} !important`,
-        outline: 'none !important'
-    }
-  },
+    select: {
+        border: `1px solid ${theme.palette.secondary.light} !important`,
+        color: `${theme.palette.text.select} !important`,
+        padding: "1.11rem 1.6rem !important",
+        '&:hover, &:active, &:focus, &:focus-visible': {
+            border: `1px solid ${theme.palette.secondary.main} !important`,
+            color: `${theme.palette.text.primary} !important`,
+            outline: 'none !important'
+        }
+    },
 }));
 
 const EmployeeSelector = ({ props }) => {
@@ -32,12 +32,14 @@ const EmployeeSelector = ({ props }) => {
         });
     }
 
+    function changeHandler(val) {
+        console.log(props)
+        props.updater(val);
+    }
+
     return (<div className="mx-2">
         <Select placeholder='Select employee' onChange={e => {
-            console.log(e.target)
-            console.log(e)
-            console.log(e.target.value)
-            // selection.setLocation(e.target.value)
+            changeHandler(e.target.querySelector('span').innerHTML);
         }} options={employeeList} className={"rounded border-2 " + themeClasses.select} />
     </div>);
 }

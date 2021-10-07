@@ -59,24 +59,11 @@ const Calendar = ({ data }) => {
 
   return (
     <div id="calendar" className="p-8 h-full flex flex-col">
-      <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
-        {floorPlan.map((sector, i) => (
-          <Sector key={i} props={{ ...sector }} />
-        ))}
-      </div>
-      <div id="calendarLegendDetails" className="flex mt-2">
-        {statusLegends.map((legend, i) => (
-          <div key={i} className="flex items-center mr-4">
-            <div className={"h-4 w-4 mr-1 rounded " + legend.color}></div>
-            {legend.status}
-          </div>
-        ))}
-      </div>
       <div
         id="calendarControls"
-        className="flex justify-between flex-grow-2 items-end"
+        className="flex justify-start flex-grow-2 items-start"
       >
-        <div id="leftControls">
+        <div id="leftControls" className="mr-2">
           <select className={"rounded border-2 px-2 py-3 " + themeClasses.select}>
             {floors.map((floor, i) => (
               <option key={i}>{floor}</option>
@@ -97,6 +84,19 @@ const Calendar = ({ data }) => {
             }}
           />
         </div>
+      </div>
+      <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
+        {floorPlan.map((sector, i) => (
+          <Sector key={i} props={{ ...sector }} />
+        ))}
+      </div>
+      <div id="calendarLegendDetails" className="flex mt-2">
+        {statusLegends.map((legend, i) => (
+          <div key={i} className="flex items-center mr-4">
+            <div className={"h-4 w-4 mr-1 rounded " + legend.color}></div>
+            {legend.status}
+          </div>
+        ))}
       </div>
     </div>
   );
