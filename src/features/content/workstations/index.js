@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import Sector from "../../shared/sector";
-import { noStatusSectordata, noStatusSectordata2 } from "../../../test-data/test-data";
+import FloorPlanSector from "../../shared/floorplan";
+import { workstationsSectorData1, workstationsSectorData2, workstationsSectorData3 } from "./test-data";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from 'react-modal';
 
@@ -85,12 +85,26 @@ const useStyles = makeStyles((theme) => ({
 
 const Workstations = ({ data }) => {
     const themeClasses = useStyles();
-    const [floorPlan, setFloorPlan] = useState([noStatusSectordata, noStatusSectordata2]);
+    const workstationsSectorData1Clone = { ...workstationsSectorData1 };
+    const workstationsSectorData2Clone = { ...workstationsSectorData2 };
+    const workstationsSectorData3Clone = { ...workstationsSectorData3 };
+    const [allFloorPlan, setAllFloorPlan] = useState({
+        "Floor 15": [workstationsSectorData1Clone, workstationsSectorData2Clone],
+        "Floor 16": [workstationsSectorData3Clone]
+    });
+    const [floorPlan, setFloorPlan] = useState([workstationsSectorData1Clone, workstationsSectorData2Clone]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [newSeat, setNewSeat] = useState(null);
-    const updateSelectedSeats = (seats) => {
-        setSelectedSeats(seats);
+    const updateSelectedSeats = (seat, add) => {
+        let temp = [...selectedSeats];
+        if (add) {
+            temp.push(seat)
+        } else {
+            temp = temp.filter(x => x.seatId !== seat.seatId);
+        }
+
+        setSelectedSeats(temp);
     };
     const floors = ["Floor 15", "Floor 16"];
     const statusLegends = [
@@ -127,13 +141,24 @@ const Workstations = ({ data }) => {
             display: 'flex',
             'flexDirection': 'column',
             'alignItems': 'baseline',
-            height: '450px',
+            height: '610px',
             width: '500px'
         },
     };
 
-    function deleteWorkstation() {
+    function floorChangeHandler(e) {
+        const val = e.target.value;
+        selectedSeats.forEach(seat => {
+            const seatDiv = document.querySelector(`#workstation${seat.seatId}`);
+            const input = seatDiv.querySelector('input');
+            input.checked = false;
+        });
+        setSelectedSeats([]);
+        setFloorPlan(allFloorPlan[val]);
+    }
 
+    function deleteWorkstation() {
+        console.log('deleting:', selectedSeats)
     }
 
     function addWorkstation() {
@@ -163,12 +188,22 @@ const Workstations = ({ data }) => {
                         <select className={"rounded border-2 " + themeClasses.select}>
                             <option>Windows</option>
                             <option>Apple</option>
-                            <option>New Docking</option>
-                            <option>Old Docking</option>
                         </select>
                     </div>
                     <div className="flex items-center w-full">
                         <label>Ports:</label>
+                    </div>
+                    <div className="flex items-center w-full mb-4">
+                        <input className={"rounded border-2 " + themeClasses.select} type="text" placeholder='Enter value' />
+                    </div>
+                    <div className="flex items-center w-full">
+                        <label>Bay:</label>
+                    </div>
+                    <div className="flex items-center w-full mb-4">
+                        <input className={"rounded border-2 " + themeClasses.select} type="text" placeholder='Enter value' />
+                    </div>
+                    <div className="flex items-center w-full">
+                        <label>Row:</label>
                     </div>
                     <div className="flex items-center w-full mb-4">
                         <input className={"rounded border-2 " + themeClasses.select} type="text" placeholder='Enter value' />
@@ -184,7 +219,10 @@ const Workstations = ({ data }) => {
                 className="flex justify-start flex-grow-2 items-start"
             >
                 <div id="leftControls" className="mr-2">
-                    <select className={"rounded border-2 px-2 py-3 " + themeClasses.select}>
+                    <select
+                        className={"rounded border-2 px-2 py-3 " + themeClasses.select}
+                        onChange={(e) => floorChangeHandler(e)}
+                    >
                         {floors.map((floor, i) => (
                             <option key={i}>{floor}</option>
                         ))}
@@ -197,7 +235,11 @@ const Workstations = ({ data }) => {
             </div>
             <div id="floor-plan" className="p-4 border-2 h-5/6 overflow-auto rounded">
                 {floorPlan.map((sector, i) => (
-                    <Sector key={i} props={{ ...sector, selectionUpdater: updateSelectedSeats, currentSelection: selectedSeats }} />
+                    <FloorPlanSector key={i} props={{
+                        ...sector,
+                        currentSelection: selectedSeats,
+                        selectionUpdater: updateSelectedSeats
+                    }} />
                 ))}
             </div>
             <div id="calendarLegendDetails" className="flex mt-2">

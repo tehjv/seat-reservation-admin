@@ -1,300 +1,101 @@
 import WorkstationStatus from "../../../constants/WorkstationStatus";
 import WorkstationType from "../../../constants/WorkstationType";
 
-const noStatusRowAllTypesData = [
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.NEWDOCK,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.OLDDOCK,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.WALL,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.NONE,
-    status: WorkstationStatus.NOSTATUS,
-  },
-];
-
-const withStatusRowAllTypesData = [
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.NOTALLOWED,
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.RESERVED,
-  },
-  {
-    type: WorkstationType.NEWDOCK,
-    status: WorkstationStatus.NOTALLOWED,
-  },
-  {
-    type: WorkstationType.OLDDOCK,
-    status: WorkstationStatus.AVAILABLE,
-  },
-  {
-    type: WorkstationType.WALL,
-    status: WorkstationStatus.NOTALLOWED,
-  },
-  {
-    type: WorkstationType.NONE,
-    status: WorkstationStatus.NOTALLOWED,
-  },
-];
-
-const noStatusRowData = [
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.NEWDOCK,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.OLDDOCK,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.NOSTATUS,
-  },
-];
-
-const withStatusRowData1 = [
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.AVAILABLE,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "2"
-  },
-  {
-    type: WorkstationType.NEWDOCK,
-    status: WorkstationStatus.AVAILABLE,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "3"
-  },
-  {
-    type: WorkstationType.OLDDOCK,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "4"
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.RESERVED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "John",
-    seatId: "5"
-  },
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "6"
-  },
-];
-
-const withStatusRowData2 = [
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.AVAILABLE,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.NEWDOCK,
-    status: WorkstationStatus.AVAILABLE,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.OLDDOCK,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.RESERVED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "John",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-];
-
-const withStatusRowData3 = [
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.RESERVED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "Jan",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.NEWDOCK,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.OLDDOCK,
-    status: WorkstationStatus.AVAILABLE,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.NOTALLOWED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "",
-    seatId: "1"
-  },
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.RESERVED,
-    monitors: 1,
-    docking: "none",
-    ports: "4521",
-    reservedBy: "Ann",
-    seatId: "1"
-  },
-];
-
-export const rowData = [
-  {
-    type: WorkstationType.WINDOWS,
-    status: WorkstationStatus.AVAILABLE,
-  },
-  {
-    type: WorkstationType.APPLE,
-    status: WorkstationStatus.RESERVED,
-  },
-  {
-    type: WorkstationType.NEWDOCK,
-    status: WorkstationStatus.NOTALLOWED,
-  },
-  {
-    type: WorkstationType.OLDDOCK,
-    status: WorkstationStatus.NOSTATUS,
-  },
-  {
-    type: WorkstationType.WALL,
-    status: WorkstationStatus.NOTALLOWED,
-  },
-  {
-    type: WorkstationType.NONE,
-    status: WorkstationStatus.NOTALLOWED,
-  },
-];
-
-export const noStatusSectordata = {
-  sectorLabel: "Sector 1",
-  sectorBays: [
-    { bayLabel: "Bay 1", bayRows: [noStatusRowAllTypesData, noStatusRowData] },
-    { bayLabel: "Bay 2", bayRows: [noStatusRowData, noStatusRowData] },
-  ],
+// FLOOR 15 DATA
+const sample = {
+  type: WorkstationType.APPLE,
+  status: WorkstationStatus.NOSTATUS,
+  monitors: 1,
+  docking: "none",
+  ports: "4521",
+  reservedBy: "",
+  seatId: "1",
+  editable: true
 };
 
-export const withStatusSectordata = {
+const workstation2 = {
+  type: WorkstationType.WINDOWS,
+  status: WorkstationStatus.NOSTATUS,
+  monitors: 1,
+  docking: "none",
+  ports: "8080",
+  reservedBy: "",
+  seatId: "1",
+  editable: true
+};
+
+let count = 1;
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function workStationRowMaker() {
+  const ret = [];
+  for (let i = 0; i < 6; i++) {
+    const type = getRandomInt(2) === 1 ? WorkstationType.WINDOWS : WorkstationType.APPLE;
+    ret.push({
+      type: type,
+      status: WorkstationStatus.NOSTATUS,
+      monitors: getRandomInt(2) + 1,
+      docking: "none",
+      ports: "8080",
+      reservedBy: "",
+      seatId: count.toString(),
+      editable: true
+    });
+    count++;
+  }
+
+  return ret;
+}
+
+const workstationsRow1 = workStationRowMaker();
+const workstationsRow2 = workStationRowMaker();
+const workstationsRow3 = workStationRowMaker();
+const workstationsRow4 = workStationRowMaker();
+const workstationsRow5 = workStationRowMaker();
+const workstationsRow6 = workStationRowMaker();
+const workstationsRow7 = workStationRowMaker();
+
+const workstationsBay1 = {
+  bayLabel: "Bay 1",
+  bayRows: [workstationsRow1, workstationsRow2],
+}
+
+const workstationsBay2 = {
+  bayLabel: "Bay 2",
+  bayRows: [workstationsRow3, workstationsRow4],
+}
+
+const workstationsBay3 = {
+  bayLabel: "Bay 3",
+  bayRows: [workstationsRow5, workstationsRow6],
+}
+
+const workstationsBay4 = {
+  bayLabel: "Bay 1",
+  bayRows: [workstationsRow7],
+}
+
+export const workstationsSectorData1 = {
   sectorLabel: "Sector 1",
   sectorBays: [
-    {
-      bayLabel: "Bay 1",
-      bayRows: [withStatusRowAllTypesData, withStatusRowData1],
-    },
-    { bayLabel: "Bay 2", bayRows: [withStatusRowData2, withStatusRowData3] },
+    workstationsBay1,
+    workstationsBay2
   ],
-};
+}
+
+export const workstationsSectorData2 = {
+  sectorLabel: "Sector 2",
+  sectorBays: [
+    workstationsBay3
+  ],
+}
+
+export const workstationsSectorData3 = {
+  sectorLabel: "Sector 1",
+  sectorBays: [
+    workstationsBay4
+  ],
+}

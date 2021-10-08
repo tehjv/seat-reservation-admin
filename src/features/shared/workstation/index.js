@@ -143,7 +143,7 @@ const Workstation = ({ props }) => {
       {!props.isFiller ? (
         <div>
           <div
-            onClick={() => { (props.status === WorkstationStatus.AVAILABLE || props.status === WorkstationStatus.RESERVED) && openModal() }}
+            onClick={() => { (props.status === WorkstationStatus.AVAILABLE || props.status === WorkstationStatus.RESERVED || props.editable) && openModal() }}
             className={
               "flex flex-col relative rounded border-2 h-20 w-28 cursor-pointer " +
               colors[props.status] + " " + themeClasses.flex
