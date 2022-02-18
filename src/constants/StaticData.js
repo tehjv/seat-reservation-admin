@@ -1,0 +1,6 @@
+const StaticData = Object.freeze({
+  BUILDINGID: "AAD4C021-49B6-410C-BC78-2D54A9991891",
+  ORGANISATIONID: "AAD4C021-49B6-410C-BC78-2D54A9991870",
+});
+
+export default StaticData;
