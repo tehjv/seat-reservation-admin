@@ -54,7 +54,7 @@ const Dashboard = ({ data }) => {
         <div>
           <img
             alt="test"
-            src="https://lh5.googleusercontent.com/7qDpLv7Q04W5ncGuAHI1GKqcq-QpdqvSUeDaKADwDpEc2-jrOJAJX8Uh0bBfBzErawzrNiDDqspxrAQbeBxB0lqNFk_4L0GbrRSYB7PTxGkCyHQcYtIQoSfsu0TMNYcUvXwpgKzr"
+            src="https://media.istockphoto.com/vectors/bar-chart-graph-diagram-statistic-business-annual-report-colorful-on-vector-id1225502447"
           ></img>
         </div>
       </div>
